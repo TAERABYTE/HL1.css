@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/css/HL1.min.css" />
-    <!-- <link rel="stylesheet" href="/src/HL1.css" /> -->
+    <!-- <link rel="stylesheet" href="/css/HL1.min.css" /> -->
+    <link rel="stylesheet" href="/src/HL1.css" />
     <link rel="stylesheet" href="/src/index.css" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <meta name="title" content="HL1.css" />
@@ -344,14 +344,15 @@
             onclick="document.querySelector('.hl-dialog').showModal();">
             Open dialog
           </button>
+
           <dialog class="hl-dialog">
             <form method="dialog">
               <div class="heading">
-                <div class="wrapper">
+                <div class="wrapper drag-handle">
                   <div class="icon"></div>
                   <p class="text">Options</p>
                 </div>
-                <button class="hl-btn close"></button>
+                <button class="hl-btn close no-drag" id="dialog-close"></button>
               </div>
               <div class="content">
                 The Half-Life 1 manual text details the game's controls,
@@ -387,11 +388,11 @@
   &lt;dialog class=&quot;hl-dialog&quot;&gt;
     &lt;form method=&quot;dialog&quot;&gt;
       &lt;div class=&quot;heading&quot;&gt;
-        &lt;div class=&quot;wrapper&quot;&gt;
+        &lt;div class=&quot;wrapper drag-handle&quot;&gt;
           &lt;div class=&quot;icon&quot;&gt;&lt;/div&gt;
           &lt;p class=&quot;text&quot;&gt;Options&lt;/p&gt;
         &lt;/div&gt;
-        &lt;button class=&quot;hl-btn close&quot;&gt;&lt;/button&gt;
+        &lt;button class=&quot;hl-btn close no-drag&quot;&gt;&lt;/button&gt;
       &lt;/div&gt;
       &lt;div class=&quot;content&quot;&gt;
         Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -410,6 +411,59 @@
     &lt;/form&gt;
   &lt;/dialog&gt;
 &lt;/section&gt;</code></pre>
+          </div>
+        </div>
+      </div>
+      <!-- # Modal-->
+      <div id="Modal">
+        <h2 style="color: #c4b550"># Modal</h2>
+
+        <section>
+          <button type="button" class="hl-btn" id="open-modal">
+            Open modal
+          </button>
+
+          <!-- modal overlay + box -->
+          <div class="hl-modal-overlay hidden" id="hl-modal-overlay">
+            <div
+              class="hl-modal"
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="modal-title">
+              <div class="heading">
+                <div class="wrapper drag-handle">
+                  <div class="icon"></div>
+                  <p class="text" id="modal-title">Custom Modal</p>
+                </div>
+                <button class="hl-btn close no-drag" id="modal-close"></button>
+              </div>
+              <div class="content">
+                This is a custom modal (not a native &lt;dialog&gt;). It can be
+                moved by dragging the header and closed with the close button or
+                by clicking the overlay.
+              </div>
+              <menu class="footer-btns">
+                <button class="hl-btn" id="modal-ok">OK</button>
+                <button class="hl-btn" id="modal-cancel">Cancel</button>
+              </menu>
+            </div>
+          </div>
+        </section>
+
+        <div class="code-block">
+          <button class="hl-btn toggle-vision">Show code</button>
+
+          <div class="inner hidden">
+            <button class="hl-btn">Copy</button>
+
+            <pre><code id="code-block">&lt;button class=&quot;hl-btn&quot; id=&quot;open-modal&quot;&gt;Open modal&lt;/button&gt;
+&lt;div class=&quot;hl-modal-overlay&quot;&gt;
+  &lt;div class=&quot;hl-modal&quot; role=&quot;dialog&quot; aria-modal=&quot;true&quot;&gt;
+    &lt;div class=&quot;heading&quot;&gt;...&lt;/div&gt;
+    &lt;div class=&quot;content&quot;&gt;...&lt;/div&gt;
+    &lt;menu class=&quot;footer-btns&quot;&gt;...&lt;/menu&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
           </div>
         </div>
       </div>

@@ -809,3 +809,44 @@ body {
     position: relative;
   }
 }
+
+/* Modal custom */
+.hl-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+.hl-modal-overlay.hidden {
+  display: none;
+}
+.hl-modal {
+  width: 480px;
+  max-width: calc(100% - 40px);
+  background: var(--bg, #3e4637);
+  color: var(--text, #dedfd6);
+  border: 2px solid var(--border-light, #8c9284);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.hl-modal .heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 10px;
+  background: rgba(0,0,0,0.2);
+  cursor: move;
+}
+.hl-modal .content {
+  padding: 12px;
+}
+.hl-modal .footer-btns {
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+  justify-content: flex-end;
+}
