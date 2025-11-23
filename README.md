@@ -1,73 +1,50 @@
-# HL1.css
+<div style="background-color: #4a5942; padding: 40px 30px;color: #ffffff;">
+  <!-- Logos -->
+  <dev style="display: inline-flex; gap: 10px; align-items: center; justify-content: center;">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/8/8f/Orange_lambda.svg" alt="HL1.css logo" height="100" style="margin: 0;">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/a/ab/Official_CSS_Logo.svg" alt="HL1.css logo" height="100" style="margin: 0;">
+  </dev>
 
-HL1.css is a small retro UI CSS library inspired by Half‑Life 1. It provides classic-style components (buttons, inputs, dialogs, tabs, tooltips, etc.) and a demo page to try them out.
+# 入 HL1.css
 
-## Quick start
+**HL1.css** is a lightweight retro UI CSS library, inspired by _Half‑Life 1_.  
+It provides classic-style components along with a demo page to try them out.
+**[Documentation](https://hl1css.vercel.app/ "Documentation")**
+<br>
 
-Add the minified stylesheet to your HTML:
+# ⚙️Installation
 
-```html
-<link rel="stylesheet" href="/css/HL1.min.css">
-```
-
-Or use the compiled (non-minified) stylesheet:
-
-```html
-<link rel="stylesheet" href="/css/HL1.css">
-```
-
-Demo script (optional):
+**Add the CDN link to your project and you're ready to go.**
 
 ```html
-<script type="module" src="./src/main.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/TAERABYTE/HL1.css@main/css/HL1.min.css" />
 ```
 
-## Development
+<br>
+<br>
 
-Install dependencies:
+# ⚙️Component
 
-```powershell
-npm install
-```
+✅Input
+✅Checkbox
+✅Select
+✅Radio Group
+✅Slider
+✅Progress Bar
+✅Button
+✅Tooltip
+✅Dialog
+✅Horizontal Rule
+✅Tabs
 
-Run dev server (Vite):
-
-```powershell
-npm run dev
-```
-
-Build CSS (compile + minify):
-
-```powershell
-npm run build:css
-```
-
-Build production bundle (Vite):
-
-```powershell
-npm run build
-```
-
-Preview production build:
-
-```powershell
-npm run preview
-```
-
-## Main files
-
-- `index.html` — demo page and entry for examples
-- `src/HL1.css` — source CSS (PostCSS input)
-- `css/HL1.css` — compiled CSS
-- `css/HL1.min.css` — minified CSS for production
-- `src/index.css` — demo-specific styles
-- `src/main.js` — small demo JS (toggle code, copy to clipboard)
-- `package.json` — scripts and dependencies
-
-## Contributing
-
-Issues and pull requests are welcome. If you want a license added (e.g. MIT), tell me and I can add it.
-
----
-
-If you want a shorter or longer version, or an additional English/Markdown badge, I can update it.
+<div style="text-align: center;">
+  <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExaW9rd3o4aDdndWIwbmp1aTMyNzNtNG10dWppcXZlZDlzazJ5bDJyNyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/2x4b4X7yUnmww/giphy.gif" 
+       alt="HL1.css logo" 
+       height="300" 
+       style="margin: 0 auto;">
+	   <a href="https://github.com/TAERABYTE/HL1.css/blob/main/src/README.md" 
+     style="color: #fb821b; font-weight: bold; text-decoration: none; font-size: 1em;">
+forDev
+</a>
+</div>
+<br>
