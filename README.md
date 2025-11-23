@@ -21,6 +21,10 @@ It provides classic-style components along with a demo page to try them out.<br>
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/TAERABYTE/HL1.css@main/css/HL1.min.css" />
 ```
 
+```html
+<script type="module" src="https://cdn.jsdelivr.net/gh/TAERABYTE/HL1.css@main/js/main.min.js" defer></script>
+```
+
 <br>
 <br>
 

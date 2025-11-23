@@ -9,7 +9,8 @@
     "preview": "vite preview",
     "build:css": "npm run build:autoprefix && npm run build:cleancss",
     "build:autoprefix": "postcss --use autoprefixer postcss-pxtorem --no-map --output css/HL1.css src/HL1.css",
-    "build:cleancss": "postcss --use cssnano --no-map -o css/HL1.min.css src/HL1.css"
+    "build:cleancss": "postcss --use cssnano --no-map -o css/HL1.min.css src/HL1.css",
+    "build:js": "esbuild src/main.js --bundle --minify --sourcemap --outfile=js/main.min.js"
   },
   "devDependencies": {
     "vite": "^7.2.4"
@@ -18,6 +19,7 @@
     "autoprefixer": "^10.4.22",
     "cssnano": "^7.1.2",
     "postcss-cli": "^11.0.1",
-    "postcss-pxtorem": "^6.1.0"
+    "postcss-pxtorem": "^6.1.0",
+    "esbuild": "^0.17.19"
   }
 }
