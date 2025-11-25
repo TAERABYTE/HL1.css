@@ -5,20 +5,24 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev:css": "postcss src/HL1.css -o HL1/HL1.css --map",
     "build": "vite build",
-    "build:HL1": "npm run build:css && npm run build:js",
+    "build:hl1": "npm run build:css && npm run build:js",
     "build:css": "postcss src/HL1.css -o HL1/HL1.min.css",
     "build:js": "esbuild src/main.js --bundle --minify --format=iife --global-name=HL1 --outfile=HL1/HL1.min.js",
     "preview": "vite preview"
   },
   "devDependencies": {
+    "autoprefixer": "^10.4.22",
+    "cssnano": "^7.1.2",
+    "postcss": "^8.5.6",
+    "postcss-cli": "^11.0.1",
+    "postcss-import": "^16.1.1",
+    "postcss-nesting": "^13.0.2",
+    "postcss-pxtorem": "^6.1.0",
     "vite": "^7.2.4"
   },
   "dependencies": {
-    "autoprefixer": "^10.4.22",
-    "cssnano": "^7.1.2",
-    "postcss-cli": "^11.0.1",
-    "postcss-pxtorem": "^6.1.0",
     "esbuild": "^0.17.19"
   }
 }
