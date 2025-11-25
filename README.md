@@ -31,82 +31,75 @@ Skip the download with jsDelivr to deliver cached version of HL1 compiled CSS an
 
 ## 📚 CSS Library
 
-### Elements
-- [ ] Block
-- [ ] Box
-- [X] Button
-- [ ] Content
-- [ ] Delete
-- [X] Icon
-- [ ] Image
-- [ ] Notification
-- [X] Progress bars
-- [ ] Table
-- [ ] Tag
-- [ ] Title
-- [X] Horizontal Rule
+### 1. ⚛️ Elements
 
-### Components
-- [ ] Breadcrumb
-- [ ] Card
-- [ ] Dropdown
-- [ ] Menu
-- [ ] Message
-- [X] Modal
-- [ ] Navbar
-- [ ] Pagination
-- [ ] Panel
-- [X] Tabs
+* **Block** [ ]
+* **Box** [ ]
+* **Button** [X]
+* **Content** [ ]
+* **Delete** [ ]
+* **Icon** [X]
+* **Image** [ ]
+* **Notification** [ ]
+* **Tag** [ ]
+* **Title** [ ]
+* **Horizontal Rule** [X]
 
-### Form
-- [ ] General
-- [X] Input
-- [ ] Textarea
-- [X] Select
-- [X] Checkbox
-- [ ] Radio
-- [ ] File
+---
 
-### Columns
-- [ ] Basics
-- [ ] Sizes
-- [ ] Responsiveness
-- [ ] Nesting
-- [ ] Gap
-- [ ] Options
+### 2. 🧩 Components
 
-### Grid
-- [ ] Smart Grid
-- [ ] Fixed Grid
-- [ ] Grid Cells
-- [ ] Playground
+* **Card** [ ]
+* **Dropdown** [ ]
+* **Menu** [ ]
+* **Message** [ ]
+* **Modal** [X]
+* **Navbar** [ ]
+* **Pagination** [ ]
+* **Panel** [ ]
+* **Tabs** [X]
+* **Progress bars** [X]
 
-### Layout
-- [X] Container
-- [ ] Hero
-- [ ] Section
-- [ ] Media Object
+---
 
-<br>
+### 3. 📝 Forms 
 
-## 📚 CSS Helpers
-- [ ] Color Palette
-- [x] Spacing
-- [ ] Visibility
-- [ ] Flexbox
-- [ ] Other
+* **General** [ ]
+* **Input** [X]
+* **Textarea** [ ]
+* **Select** [X]
+* **Checkbox** [X]
+* **Radio** [ ]
+* **File** [ ]
 
+---
+
+### 4. 📐 Layout 
+
+* **Container** [X]
+* **Hero** [ ]
+* **Section** [ ]
+* **Media Object** [ ]
+* **Columns** [ ]
+* **Grid** [ ]
+
+---
+
+### 5. 🛠️ Utilities
+
+* **Color Palette** [ ]
+* **Spacing** [X]
+* **Visibility** [ ]
+* **Flexbox** [ ]
+* **Other** [ ]
+
+---
 
 <br>
 <br>
 <br>
 <br>
 <br>
-
-
-
-
-
 
 ```html
 🧡 Inspiration and Backstory
