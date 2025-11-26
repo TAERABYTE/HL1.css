@@ -184,6 +184,10 @@
             Open Modal
           </button>
 
+          <button class="hl-btn" data-hl-modal-open="my-modal-2">
+            Open Modal Tabs
+          </button>
+
           <!-- 3. Modal Structure -->
           <div class="hl-modal-overlay hidden" data-hl-modal-id="my-modal-1">
             <div class="hl-modal">
@@ -204,6 +208,92 @@
                   OK
                 </button>
                 <button class="hl-btn" data-hl-modal-close="my-modal-1">
+                  Cancel
+                </button>
+              </menu>
+            </div>
+          </div>
+
+          <div class="hl-modal-overlay hidden" data-hl-modal-id="my-modal-2">
+            <div class="hl-modal-tabs">
+              <div class="heading" data-hl-modal-header>
+                <div class="wrapper">
+                  <div class="icon"></div>
+                  <p class="text">Tabs Modal</p>
+                </div>
+                <button
+                  class="hl-btn close"
+                  data-hl-modal-close="my-modal-2"></button>
+              </div>
+
+              <div class="content">
+                <div class="hl-tabs">
+                  <input
+                    class="radiotab"
+                    name="modal-tabs"
+                    tabindex="1"
+                    type="radio"
+                    id="modal-tabone"
+                    checked="checked" />
+                  <label class="label" for="modal-tabone">Settings</label>
+                  <div class="panel" tabindex="1">
+                    <h2>Settings</h2>
+                    <p>Details</p>
+                  </div>
+                  <input
+                    class="radiotab"
+                    tabindex="1"
+                    name="modal-tabs"
+                    type="radio"
+                    id="modal-tabtwo" />
+                  <label class="label" for="modal-tabtwo">Config</label>
+                  <div class="panel" tabindex="1">
+                    <h2>Config</h2>
+                    <p>Details</p>
+                    <div class="hl-checkbox">
+                      <input id="Config1" type="checkbox" />
+                      <label class="hl-checkbox__label" for="Config1"
+                        >Config ONE</label
+                      >
+                    </div>
+                    <div class="hl-checkbox">
+                      <input id="Config2" type="checkbox" />
+                      <label class="hl-checkbox__label" for="Config2"
+                        >Config TWO</label
+                      >
+                    </div>
+                    <div class="hl-checkbox">
+                      <input id="Config3" type="checkbox" />
+                      <label class="hl-checkbox__label" for="Config3"
+                        >Config THREE</label
+                      >
+                    </div>
+                    <div class="hl-checkbox">
+                      <input id="Config4" type="checkbox" />
+                      <label class="hl-checkbox__label" for="Config4"
+                        >Config FOUR</label
+                      >
+                    </div>
+                  </div>
+                  <input
+                    class="radiotab"
+                    tabindex="1"
+                    name="modal-tabs"
+                    type="radio"
+                    id="modal-tabthree" />
+                  <label class="label" for="modal-tabthree">Tab Three</label>
+                  <div class="panel" tabindex="1">
+                    <h2>Tab Three Content</h2>
+                    <p>Tab content...</p>
+                  </div>
+                </div>
+              </div>
+
+              <menu class="footer-btns">
+                <button class="hl-btn" data-hl-modal-close="my-modal-2">
+                  OK
+                </button>
+                <button class="hl-btn" data-hl-modal-close="my-modal-2">
                   Cancel
                 </button>
               </menu>

@@ -106,7 +106,7 @@
       return;
     }
 
-    const modal = overlay.querySelector(".hl-modal");
+    const modal = overlay.querySelector(".hl-modal, .hl-modal-tabs");
     if (!modal) return;
 
     // Reset position
