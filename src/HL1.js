@@ -1,191 +1,210 @@
-document.querySelectorAll(".toggle-vision").forEach((button) => {
-  button.addEventListener("click", () => {
-    const block = button.closest(".code-block")?.querySelector(".inner");
-    if (!block) return;
+(function () {
+  "use strict";
 
-    block.classList.toggle("hidden");
-    button.textContent = block.classList.contains("hidden")
-      ? "Show code"
-      : "Hide code";
+  /* -------------------------------------------------------
+     Show and Hide code
+  ------------------------------------------------------- */
+  document.querySelectorAll(".toggle-vision").forEach((button) => {
+    button.addEventListener("click", () => {
+      const block = button.closest(".code-block")?.querySelector(".inner");
+      if (!block) return;
+      block.classList.toggle("hidden");
+      button.textContent = block.classList.contains("hidden")
+        ? "Show code"
+        : "Hide code";
+    });
   });
-});
 
-/* -------------------------------------------------------
-   Code Block: Copy to Clipboard
-------------------------------------------------------- */
-document.querySelectorAll(".inner .hl-btn").forEach((button) => {
-  let timeoutId = null;
-
-  button.addEventListener("click", async () => {
-    const codeEl = button.closest(".inner")?.querySelector("code");
-    if (!codeEl) return;
-
-    try {
-      await navigator.clipboard.writeText(codeEl.textContent.trim());
-      button.textContent = "Copied!";
-
-      clearTimeout(timeoutId);
-      timeoutId = setTimeout(() => (button.textContent = "Copy"), 2000);
-    } catch (err) {
-      console.error("Clipboard copy failed:", err);
-    }
-  });
-});
-
-/* -------------------------------------------------------
-   Utility: make any element draggable
-------------------------------------------------------- */
-function makeDraggable(el, handle) {
-  if (!el || !handle) return;
-
-  handle.style.cursor = "move";
-
-  handle.addEventListener("pointerdown", (ev) => {
-    if (ev.button !== 0) return;
-    // don't start dragging when the initial target is an interactive element
-    // (so buttons/links/inputs inside the header remain clickable)
-    const interactiveSelector =
-      "button, a, input, textarea, select, [role='button'], .no-drag";
-    if (ev.target instanceof Element && ev.target.closest(interactiveSelector))
-      return;
-    ev.preventDefault();
-
-    const rect = el.getBoundingClientRect();
-    const offsetX = ev.clientX - rect.left;
-    const offsetY = ev.clientY - rect.top;
-
-    el.style.position = "fixed";
-    el.style.margin = "0";
-
-    const onMove = (e) => {
-      const vw = innerWidth;
-      const vh = innerHeight;
-      const dRect = el.getBoundingClientRect();
-
-      const left = Math.min(Math.max(e.clientX - offsetX, 0), vw - dRect.width);
-      const top = Math.min(Math.max(e.clientY - offsetY, 0), vh - dRect.height);
-
-      el.style.left = `${left}px`;
-      el.style.top = `${top}px`;
-
-      el.dataset.moved = "true"; // Mark as dragged
-      el.style.transform = ""; // Remove centering transform
-    };
-
-    const onUp = () => {
-      removeEventListener("pointermove", onMove);
-      removeEventListener("pointerup", onUp);
-    };
-
-    addEventListener("pointermove", onMove);
-    addEventListener("pointerup", onUp);
-  });
-}
-
-/* -------------------------------------------------------
-   <dialog> draggable support
-------------------------------------------------------- */
-function makeDialogDraggable(dialog) {
-  // prefer an explicit drag handle inside the heading so interactive
-  // elements (buttons) inside the heading remain clickable
-  const handle =
-    dialog?.querySelector(".heading .drag-handle") ??
-    dialog?.querySelector(".heading");
-  if (!handle) return;
-
-  makeDraggable(dialog, handle);
-
-  // support both explicit id (#dialog-close) and class (.close)
-  const closeBtn = dialog.querySelector(
-    ".heading #dialog-close, .heading .close"
-  );
-  closeBtn?.addEventListener("click", (e) => {
-    e.preventDefault();
-    // close() exists on HTMLDialogElement
-    try {
-      dialog.close?.();
-    } catch (err) {
-      // fallback: hide attribute if custom handling
-      console.error("Dialog close failed:", err);
-    }
-  });
-}
-
-// ensure Escape closes native dialogs and hides custom modal overlay
-document.addEventListener("keydown", (e) => {
-  if (e.key !== "Escape") return;
-
-  // close any open <dialog.hl-dialog>
-  document.querySelectorAll("dialog.hl-dialog").forEach((d) => {
-    try {
-      if (typeof d.open === "boolean" ? d.open : d.hasAttribute("open")) {
-        d.close?.();
+  /* -------------------------------------------------------
+     Code Block: Copy to Clipboard
+  ------------------------------------------------------- */
+  document.querySelectorAll(".inner .hl-btn").forEach((button) => {
+    let timeoutId = null;
+    button.addEventListener("click", async () => {
+      const codeEl = button.closest(".inner")?.querySelector("code");
+      if (!codeEl) return;
+      try {
+        await navigator.clipboard.writeText(codeEl.textContent.trim());
+        button.textContent = "Copied!";
+        clearTimeout(timeoutId);
+        timeoutId = setTimeout(() => (button.textContent = "Copy"), 2000);
+      } catch (err) {
+        console.error("Clipboard copy failed:", err);
       }
-    } catch {
-      // ignore
+    });
+  });
+
+  /* -------------------------------------------------------
+     Modal System - Event Delegation
+  ------------------------------------------------------- */
+  
+  // Track how many modals are currently open
+  let openModalCount = 0;
+
+  // Event delegation - จับ clicks ที่ document level
+  document.addEventListener("click", function (e) {
+    const target = e.target;
+
+    // เปิด Modal
+    const openAttr = target.getAttribute("data-hl-modal-open");
+    if (openAttr) {
+      e.preventDefault();
+      openModal(openAttr);
+      return;
+    }
+
+    // ปิด Modal - ปุ่ม close
+    const closeAttr = target.getAttribute("data-hl-modal-close");
+    if (closeAttr) {
+      e.preventDefault();
+      closeModal(closeAttr);
+      return;
+    }
+
+    // ปิด Modal - คลิก overlay
+    if (target.classList.contains("hl-modal-overlay")) {
+      const modalId = target.getAttribute("data-hl-modal-id");
+      if (modalId) {
+        closeModal(modalId);
+      }
     }
   });
 
-  // hide custom overlay if visible
-  const overlay = document.getElementById("hl-modal-overlay");
-  if (overlay && !overlay.classList.contains("hidden")) {
-    overlay.classList.add("hidden");
-  }
-});
+  // ESC key
+  document.addEventListener("keydown", function (e) {
+    if (e.key !== "Escape") return;
 
-// document.addEventListener("DOMContentLoaded", () => {
-//   // เปิดใช้งานการลากสำหรับทุก dialog
-//   document.querySelectorAll(".hl-dialog").forEach((dialog) => {
-//     makeDialogDraggable(dialog);
-//   });
-// });
+    // Close any open .hl-modal-overlay
+    const openModals = document.querySelectorAll(
+      ".hl-modal-overlay:not(.hidden)"
+    );
+    openModals.forEach((overlay) => {
+      const modalId = overlay.getAttribute("data-hl-modal-id");
+      if (modalId) closeModal(modalId);
+    });
 
-/* -------------------------------------------------------
-   Custom modal (.hl-modal)
-------------------------------------------------------- */
-(() => {
-  const overlay = document.getElementById("hl-modal-overlay");
-  if (!overlay) return;
+    // Close any open <dialog.hl-dialog>
+    document.querySelectorAll("dialog.hl-dialog").forEach((d) => {
+      try {
+        if (typeof d.open === "boolean" ? d.open : d.hasAttribute("open")) {
+          d.close?.();
+        }
+      } catch {
+        // ignore
+      }
+    });
+  });
 
-  const modal = overlay.querySelector(".hl-modal");
-  const header = modal?.querySelector(".heading");
+  /* -------------------------------------------------------
+     Modal Functions
+  ------------------------------------------------------- */
+  
+  function openModal(modalId) {
+    const overlay = document.querySelector(`[data-hl-modal-id="${modalId}"]`);
+    if (!overlay) {
+      console.warn(`Modal "${modalId}" not found`);
+      return;
+    }
 
-  const openBtn = document.getElementById("open-modal");
-  const closeBtn = document.getElementById("modal-close");
-  const okBtn = document.getElementById("modal-ok");
-  const cancelBtn = document.getElementById("modal-cancel");
+    const modal = overlay.querySelector(".hl-modal");
+    if (!modal) return;
 
-  /* --- Center modal every time it opens --- */
-  const resetModalPos = () => {
-    modal.dataset.moved = "false";
+    // Reset position
     modal.style.left = "50%";
     modal.style.top = "50%";
     modal.style.transform = "translate(-50%, -50%)";
     modal.style.position = "fixed";
-  };
 
-  const showModal = () => {
-    resetModalPos(); // center every time
+    // Show
     overlay.classList.remove("hidden");
-  };
+    
+    openModalCount++;
 
-  const hideModal = () => {
-    overlay.classList.add("hidden");
-  };
+    // Setup draggable ถ้ายังไม่ได้ setup
+    if (!modal.dataset.draggable) {
+      const header = modal.querySelector(".heading, [data-hl-modal-header]");
+      if (header) {
+        makeDraggable(modal, header);
+        modal.dataset.draggable = "true";
+      }
+    }
 
-  openBtn?.addEventListener("click", showModal);
-  closeBtn?.addEventListener("click", (e) => {
-    e.preventDefault();
-    hideModal();
-  });
-  okBtn?.addEventListener("click", hideModal);
-  cancelBtn?.addEventListener("click", hideModal);
-
-  overlay.addEventListener("click", (e) => {
-    if (e.target === overlay) hideModal();
-  });
-
-  if (modal && header) {
-    makeDraggable(modal, header);
+    // Focus trap
+    modal.setAttribute("tabindex", "-1");
+    modal.focus();
   }
+
+  function closeModal(modalId) {
+    const overlay = document.querySelector(`[data-hl-modal-id="${modalId}"]`);
+    if (!overlay) return;
+
+    overlay.classList.add("hidden");
+    
+    openModalCount = Math.max(0, openModalCount - 1);
+  }
+
+  function makeDraggable(el, handle) {
+    if (!el || !handle) return;
+
+    handle.style.cursor = "move";
+
+    handle.addEventListener("pointerdown", function (ev) {
+      if (ev.button !== 0) return;
+
+      const interactiveSelector =
+        'button, a, input, textarea, select, [role="button"], .no-drag, [data-hl-modal-close]';
+      if (
+        ev.target instanceof Element &&
+        ev.target.closest(interactiveSelector)
+      ) {
+        return;
+      }
+
+      ev.preventDefault();
+
+      const rect = el.getBoundingClientRect();
+      const offsetX = ev.clientX - rect.left;
+      const offsetY = ev.clientY - rect.top;
+
+      el.style.position = "fixed";
+      el.style.margin = "0";
+
+      function onMove(e) {
+        const vw = window.innerWidth;
+        const vh = window.innerHeight;
+        const dRect = el.getBoundingClientRect();
+        const left = Math.min(
+          Math.max(e.clientX - offsetX, 0),
+          vw - dRect.width
+        );
+        const top = Math.min(
+          Math.max(e.clientY - offsetY, 0),
+          vh - dRect.height
+        );
+
+        el.style.left = left + "px";
+        el.style.top = top + "px";
+        el.style.transform = "";
+      }
+
+      function onUp() {
+        document.removeEventListener("pointermove", onMove);
+        document.removeEventListener("pointerup", onUp);
+      }
+
+      document.addEventListener("pointermove", onMove);
+      document.addEventListener("pointerup", onUp);
+    });
+  }
+
+  /* -------------------------------------------------------
+     Public API
+  ------------------------------------------------------- */
+  
+  window.HLModal = {
+    open: openModal,
+    close: closeModal,
+  };
+
+  console.log("HL1 CDN loaded ✓");
 })();

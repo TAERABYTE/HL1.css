@@ -144,8 +144,7 @@
           <button
             type="button"
             class="hl-btn"
-            onclick="document.querySelector('.hl-dialog').showModal();"
-          >
+            onclick="document.querySelector('.hl-dialog').showModal();">
             Open dialog
           </button>
 
@@ -181,33 +180,32 @@
         <h2 style="color: #c4b550"># Modal</h2>
 
         <section>
-          <button type="button" class="hl-btn" id="open-modal">
-            Open modal
+          <button class="hl-btn" data-hl-modal-open="my-modal-1">
+            Open Modal
           </button>
 
-          <!-- modal overlay + box -->
-          <div class="hl-modal-overlay hidden" id="hl-modal-overlay">
-            <div
-              class="hl-modal"
-              role="dialog"
-              aria-modal="true"
-              aria-labelledby="modal-title"
-            >
-              <div class="heading">
-                <div class="wrapper drag-handle">
-                  <div class="icon"></div>
-                  <p class="text" id="modal-title">Custom Modal</p>
+          <!-- 3. Modal Structure -->
+          <div class="hl-modal-overlay hidden" data-hl-modal-id="my-modal-1">
+            <div class="hl-modal">
+              <div class="heading" data-hl-modal-header>
+                <div class="wrapper">
+                  <p class="text">My Modal</p>
                 </div>
-                <button class="hl-btn close no-drag" id="modal-close"></button>
+                <!-- ปุ่มปิด -->
+                <button
+                  class="hl-btn close"
+                  data-hl-modal-close="my-modal-1"></button>
               </div>
-              <div class="content">
-                This is a custom modal (not a native &lt;dialog&gt;). It can be
-                moved by dragging the header and closed with the close button or
-                by clicking the overlay.
-              </div>
+
+              <div class="content">Modal content here</div>
+
               <menu class="footer-btns">
-                <button class="hl-btn" id="modal-ok">OK</button>
-                <button class="hl-btn" id="modal-cancel">Cancel</button>
+                <button class="hl-btn" data-hl-modal-close="my-modal-1">
+                  OK
+                </button>
+                <button class="hl-btn" data-hl-modal-close="my-modal-1">
+                  Cancel
+                </button>
               </menu>
             </div>
           </div>
@@ -240,8 +238,7 @@
             tabindex="1"
             type="radio"
             id="tabone"
-            checked="checked"
-          />
+            checked="checked" />
           <label class="label" for="tabone">Tab One</label>
           <div class="panel" tabindex="1">
             <h2>Tab One Content</h2>
@@ -252,8 +249,7 @@
             tabindex="1"
             name="tabs"
             type="radio"
-            id="tabtwo"
-          />
+            id="tabtwo" />
           <label class="label" for="tabtwo">Tab Two</label>
           <div class="panel" tabindex="1">
             <h2>Tab Two Content</h2>
@@ -264,8 +260,7 @@
             tabindex="1"
             name="tabs"
             type="radio"
-            id="tabthree"
-          />
+            id="tabthree" />
           <label class="label" for="tabthree">Tab Three</label>
           <div class="panel" tabindex="1">
             <h2>Tab Three Content</h2>
